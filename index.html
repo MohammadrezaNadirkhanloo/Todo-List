@@ -11,8 +11,46 @@
     <link rel="shortcut icon" href="./img/icon.png" type="image/x-icon" />
     <title>Todo-List</title>
   </head>
-  <body class="font-sans bg-gray-800">
-        
+  <body class="font-sans bg-slate-950">
+    <div class="container">
+      <div class="space-y-3">
+        <h1 class="text-white text-center pt-6 text-2xl font-semibold">
+          TODO LIST
+        </h1>
+        <div class="flex justify-center items-center gap-4">
+          <div class="text-gray-200">
+            <button
+              class="py-2.5 px-2 md:px-4 text-xs md:text-base focus:outline-none rounded-lg border focus:z-10 focus:ring-1 focus:ring-gray-700 bg-gray-800 text-gray-200 border-gray-600 hover:text-white hover:bg-gray-700"
+            >
+              مشاهده همه
+            </button>
+          </div>
+          <div class="relative flex items-center md:w-1/2">
+            <div class="absolute">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-8 text-gray-200 pe-1.5 ms-2 border-l-2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              class="rounded-none rounded-e-lg block min-w-0 w-full p-2.5 ps-12 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:ring-2 focus:ring-slate-600"
+              placeholder="مثال : برانامه نویسی..."
+            />
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="./src/js/script.js"></script>
   </body>
 </html>
