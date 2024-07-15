@@ -129,7 +129,7 @@ function dataTodos(datatodo) {
   
                     <button
                       onmouseenter="styleIconMouseenter('deleteOutline${uniqueId}','deleteSolid${uniqueId}')"
-                      onclick="red(${data.id})"
+                      onclick="removeItem(${data.id})"
                       onmouseleave="styleIconMouseleave('deleteOutline${uniqueId}','deleteSolid${uniqueId}')"
                       title="Delete"
                     >
@@ -223,9 +223,9 @@ addTodoList.addEventListener("submit", addNewTodo);
 
 // -------------------
 
-function red(id) {
-  const dataDelete = datas.find((data) => data.id === id);
-  const indexDataDelete = datas.indexOf(dataDelete);
-  datas.splice(indexDataDelete, 1);
+// event remove item
+function removeItem(id) {
+  datas = datas.filter((data)=> data.id !== id);
   dataTodos(datas);
 }
+
