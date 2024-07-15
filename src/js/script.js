@@ -5,6 +5,7 @@ const iconDropdown = document.getElementById("icon_dropdown");
 const textDropdown = document.getElementById("text_btn_dropdown");
 const itemDropdown = document.querySelectorAll(".item");
 const bgBackMenu = document.querySelector("#bg_back_menu");
+const selectMouse = document.getElementById("styleDelete");
 
 bgBackMenu.addEventListener("click", () => {
   menuDropdown.classList.add("hidden");
@@ -15,6 +16,15 @@ function showMenu() {
   menuDropdown.classList.toggle("hidden");
   iconDropdown.classList.toggle("-rotate-180");
   bgBackMenu.classList.toggle("hidden");
+}
+
+function styleIconMouseenter(outline, solid) {
+  document.getElementById(outline).classList.add("hidden");
+  document.getElementById(solid).classList.remove("hidden");
+}
+function styleIconMouseleave(outline, solid) {
+  document.getElementById(outline).classList.remove("hidden");
+  document.getElementById(solid).classList.add("hidden");
 }
 
 let num = 0;
