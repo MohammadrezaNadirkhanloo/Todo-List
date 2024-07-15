@@ -7,24 +7,11 @@ const itemDropdown = document.querySelectorAll(".item");
 const bgBackMenu = document.querySelector("#bg_back_menu");
 const selectMouse = document.getElementById("styleDelete");
 
-bgBackMenu.addEventListener("click", () => {
-  menuDropdown.classList.add("hidden");
-  iconDropdown.classList.remove("-rotate-180");
-  bgBackMenu.classList.add("hidden");
-});
+// Menu show
 function showMenu() {
   menuDropdown.classList.toggle("hidden");
   iconDropdown.classList.toggle("-rotate-180");
   bgBackMenu.classList.toggle("hidden");
-}
-
-function styleIconMouseenter(outline, solid) {
-  document.getElementById(outline).classList.add("hidden");
-  document.getElementById(solid).classList.remove("hidden");
-}
-function styleIconMouseleave(outline, solid) {
-  document.getElementById(outline).classList.remove("hidden");
-  document.getElementById(solid).classList.add("hidden");
 }
 
 let num = 0;
@@ -46,3 +33,24 @@ btnDropdown.addEventListener("click", showMenu);
 itemDropdown.forEach((item) => {
   item.addEventListener("click", itemMenu);
 });
+
+// The background that is displayed when the menu is displayed
+bgBackMenu.addEventListener("click", () => {
+  menuDropdown.classList.add("hidden");
+  iconDropdown.classList.remove("-rotate-180");
+  bgBackMenu.classList.add("hidden");
+});
+
+// -------------
+
+// Change icon list
+function styleIconMouseenter(outline, solid) {
+  document.getElementById(outline).classList.add("hidden");
+  document.getElementById(solid).classList.remove("hidden");
+}
+function styleIconMouseleave(outline, solid) {
+  document.getElementById(outline).classList.remove("hidden");
+  document.getElementById(solid).classList.add("hidden");
+}
+
+// ------------
