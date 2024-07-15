@@ -14,7 +14,6 @@ const addTodoInput = document.getElementById("input_Todo");
 const listTodoItem = document.getElementById("todoList");
 //-----------
 
-
 let datas = [];
 
 // Menu show
@@ -97,8 +96,6 @@ function styleIconMouseleave(outline, solid) {
 
 // ------------
 
-
-
 // check img and item
 function checkItem(data) {
   if (data !== 0) {
@@ -110,7 +107,7 @@ function checkItem(data) {
   }
 }
 
-//create code html 
+//create code html
 function dataTodos(datatodo) {
   let htmldata = "";
   let uniqueId = 0;
@@ -132,6 +129,7 @@ function dataTodos(datatodo) {
   
                     <button
                       onmouseenter="styleIconMouseenter('deleteOutline${uniqueId}','deleteSolid${uniqueId}')"
+                      onclick="red(${data.id})"
                       onmouseleave="styleIconMouseleave('deleteOutline${uniqueId}','deleteSolid${uniqueId}')"
                       title="Delete"
                     >
@@ -167,7 +165,7 @@ function dataTodos(datatodo) {
                     <button
                       onmouseenter="styleIconMouseenter('checkOutline${uniqueId}','checkSolid${uniqueId}')"
                       onmouseleave="styleIconMouseleave('checkOutline${uniqueId}','checkSolid${uniqueId}')"
-                                          title="Compeletd"
+                      title="Compeletd"
   
                     >
                       <svg
@@ -221,7 +219,13 @@ function addNewTodo(e) {
   checkItem(datas.length);
 }
 
-
 addTodoList.addEventListener("submit", addNewTodo);
 
 // -------------------
+
+function red(id) {
+  const dataDelete = datas.find((data) => data.id === id);
+  const indexDataDelete = datas.indexOf(dataDelete);
+  datas.splice(indexDataDelete, 1);
+  dataTodos(datas);
+}
