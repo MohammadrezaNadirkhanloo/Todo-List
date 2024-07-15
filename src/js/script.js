@@ -114,7 +114,7 @@ function dataTodos(datatodo) {
   datatodo.forEach((data) => {
     uniqueId++;
     htmldata += `<div
-                  class="flex justify-between items-center p-5 hover:bg-slate-900 hover:rounded-xl my-2 transition"
+                  class="flex justify-between items-center p-5 ${data.isCompeletd ? "text-slate-400 line-through blur-sm bg-slate-900 rounded-xl " : "hover:bg-slate-900 hover:rounded-xl"}  my-2 transition"
                 >
                   <p title="${data.title}" class="text-gray-300 text-xl font-medium w-1/2 truncate">
                   ${data.title}
@@ -166,7 +166,8 @@ function dataTodos(datatodo) {
                       onmouseenter="styleIconMouseenter('checkOutline${uniqueId}','checkSolid${uniqueId}')"
                       onmouseleave="styleIconMouseleave('checkOutline${uniqueId}','checkSolid${uniqueId}')"
                       title="Compeletd"
-  
+                      onclick="compeletdItem(${data.id})"
+                      class="${data.isCompeletd ? "hidden" : "block"}"
                     >
                       <svg
                         id="checkOutline${uniqueId}"
@@ -225,7 +226,14 @@ addTodoList.addEventListener("submit", addNewTodo);
 
 // event remove item
 function removeItem(id) {
-  datas = datas.filter((data)=> data.id !== id);
-  dataTodos(datas);
+  datas = datas.filter((data) => data.id !== id);
+  itemMenu()
+  checkItem(datas.length);
 }
 
+function compeletdItem(id) {
+  const data = datas.find((item) => item.id === id);
+  data.isCompeletd = true;
+
+  dataTodos(datas);
+}
