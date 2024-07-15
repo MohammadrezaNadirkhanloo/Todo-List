@@ -227,13 +227,13 @@ addTodoList.addEventListener("submit", addNewTodo);
 // event remove item
 function removeItem(id) {
   datas = datas.filter((data) => data.id !== id);
-  itemMenu()
+  dataTodos(datas);
   checkItem(datas.length);
 }
 
+// event Compeletd item
 function compeletdItem(id) {
   const data = datas.find((item) => item.id === id);
   data.isCompeletd = true;
-
   dataTodos(datas);
 }
