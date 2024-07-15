@@ -8,6 +8,13 @@ const itemDropdown = document.querySelectorAll(".item");
 const bgBackMenu = document.querySelector("#bg_back_menu");
 const selectMouse = document.getElementById("styleDelete");
 // ---------
+// created data
+const addTodoList = document.getElementById("add_Todo");
+const addTodoInput = document.getElementById("input_Todo");
+const listTodoItem = document.getElementById("todoList");
+//-----------
+
+
 let datas = [];
 
 // Menu show
@@ -17,7 +24,7 @@ function showMenu() {
   bgBackMenu.classList.toggle("hidden");
 }
 
-let num = 0;
+//filter data & ui menu
 function itemMenu(e) {
   const key = e.target.value;
   switch (key) {
@@ -90,11 +97,9 @@ function styleIconMouseleave(outline, solid) {
 
 // ------------
 
-const addTodoList = document.getElementById("add_Todo");
-const addTodoInput = document.getElementById("input_Todo");
-const listTodoItem = document.getElementById("todoList");
 
-// Add item list
+
+// check img and item
 function checkItem(data) {
   if (data !== 0) {
     listTodoItem.classList.remove("hidden");
@@ -105,21 +110,7 @@ function checkItem(data) {
   }
 }
 
-function addNewTodo(e) {
-  e.preventDefault();
-
-  if (!addTodoInput.value) return alert("کاری تعریف نشده");
-  const newData = {
-    id: Date.now(),
-    dateCreated: new Date().toLocaleDateString("fa"),
-    title: addTodoInput.value,
-    isCompeletd: false,
-  };
-  datas.push(newData);
-  dataTodos(datas);
-  checkItem(datas.length);
-}
-
+//create code html 
 function dataTodos(datatodo) {
   let htmldata = "";
   let uniqueId = 0;
@@ -214,6 +205,22 @@ function dataTodos(datatodo) {
   listTodoItem.innerHTML = htmldata;
   addTodoInput.value = "";
 }
+
+// add data in form
+function addNewTodo(e) {
+  e.preventDefault();
+  if (!addTodoInput.value) return alert("کاری تعریف نشده");
+  const newData = {
+    id: Date.now(),
+    dateCreated: new Date().toLocaleDateString("fa"),
+    title: addTodoInput.value,
+    isCompeletd: false,
+  };
+  datas.push(newData);
+  dataTodos(datas);
+  checkItem(datas.length);
+}
+
 
 addTodoList.addEventListener("submit", addNewTodo);
 
