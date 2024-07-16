@@ -15,6 +15,7 @@ const listTodoItem = document.getElementById("todoList");
 //-----------
 
 let datas = [];
+let eventValue = null;
 
 // Menu show
 function showMenu() {
@@ -24,12 +25,11 @@ function showMenu() {
 }
 
 //filter data & ui menu
-function itemMenu(e) {
-  const key = e.target.value;
-  switch (key) {
+function itemMenu(value) {
+  switch (value) {
     case "all": {
       textDropdown.textContent = "مشاهده همه";
-      showMenu();
+      // showMenu();
       if (datas.length === 0) return alert("لیست خالی است");
       dataTodos(datas);
       checkItem(datas.length);
@@ -38,7 +38,7 @@ function itemMenu(e) {
 
     case "completed": {
       textDropdown.textContent = "انجام شده";
-      showMenu();
+      // showMenu();
       if (datas.length === 0) return alert("لیست خالی است");
       const newData = datas.filter((data) => {
         return data.isCompeletd;
@@ -51,7 +51,7 @@ function itemMenu(e) {
 
     case "uncompleted": {
       textDropdown.textContent = "انجام نشده";
-      showMenu();
+      // showMenu();
       if (datas.length === 0) return alert("لیست خالی است");
       const newData = datas.filter((data) => {
         return !data.isCompeletd;
@@ -72,7 +72,10 @@ function itemMenu(e) {
 btnDropdown.addEventListener("click", showMenu);
 
 itemDropdown.forEach((item) => {
-  item.addEventListener("click", itemMenu);
+  item.addEventListener("click", (e) => {
+    eventValue = e.target.value;
+    itemMenu(eventValue);
+  });
 });
 
 // The background that is displayed when the menu is displayed
@@ -114,9 +117,15 @@ function dataTodos(datatodo) {
   datatodo.forEach((data) => {
     uniqueId++;
     htmldata += `<div
-                  class="flex justify-between items-center p-5 ${data.isCompeletd ? "text-slate-400 line-through blur-sm bg-slate-900 rounded-xl " : "hover:bg-slate-900 hover:rounded-xl"}  my-2 transition"
+                  class="flex justify-between items-center p-5 ${
+                    data.isCompeletd
+                      ? "text-slate-400 line-through blur-sm bg-slate-900 rounded-xl "
+                      : "hover:bg-slate-900 hover:rounded-xl"
+                  }  my-2 transition"
                 >
-                  <p title="${data.title}" class="text-gray-300 text-xl font-medium w-1/2 truncate">
+                  <p title="${
+                    data.title
+                  }" class="text-gray-300 text-xl font-medium w-1/2 truncate">
                   ${data.title}
                   </p>
                   <div class="flex gap-5 items-center">
@@ -227,13 +236,12 @@ addTodoList.addEventListener("submit", addNewTodo);
 // event remove item
 function removeItem(id) {
   datas = datas.filter((data) => data.id !== id);
-  dataTodos(datas);
-  checkItem(datas.length);
+  itemMenu(eventValue);
 }
 
 // event Compeletd item
 function compeletdItem(id) {
   const data = datas.find((item) => item.id === id);
   data.isCompeletd = true;
-  dataTodos(datas);
+  itemMenu(eventValue);
 }
