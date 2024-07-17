@@ -14,8 +14,5 @@ Final result :
 
 </div>
 
-[![][banner-url]][repo-url]  
-
-
 
 [repo-url]: https://mohammadrezanadirkhanloo.github.io/NFT-Bootstrap/
