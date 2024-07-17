@@ -252,11 +252,13 @@ function compeletdItem(id) {
   itemMenu(menuValue);
 }
 
+// get data in local storage
 function getDatasLocalStorage() {
   const datasLS = JSON.parse(localStorage.getItem("dataskey")) || [];
   return datasLS;
 }
 
+// seve data in local storage
 function setDataLocalStorage(data) {
   const datas = getDatasLocalStorage();
   datas.push(data);
