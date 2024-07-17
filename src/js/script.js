@@ -14,8 +14,14 @@ const addTodoInput = document.getElementById("input_Todo");
 const listTodoItem = document.getElementById("todoList");
 //-----------
 
-let datas = [];
-let eventValue = null;
+// let datas = [];
+
+let menuValue = "all";
+
+document.addEventListener("DOMContentLoaded", (e) => {
+  const datas = getDatasLocalStorage();
+  dataTodos(datas);
+});
 
 // Menu show
 function showMenu() {
@@ -26,11 +32,10 @@ function showMenu() {
 
 //filter data & ui menu
 function itemMenu(value) {
+  const datas = getDatasLocalStorage();
   switch (value) {
     case "all": {
       textDropdown.textContent = "مشاهده همه";
-      // showMenu();
-      if (datas.length === 0) return alert("لیست خالی است");
       dataTodos(datas);
       checkItem(datas.length);
       break;
@@ -38,8 +43,6 @@ function itemMenu(value) {
 
     case "completed": {
       textDropdown.textContent = "انجام شده";
-      // showMenu();
-      if (datas.length === 0) return alert("لیست خالی است");
       const newData = datas.filter((data) => {
         return data.isCompeletd;
       });
@@ -51,13 +54,10 @@ function itemMenu(value) {
 
     case "uncompleted": {
       textDropdown.textContent = "انجام نشده";
-      // showMenu();
-      if (datas.length === 0) return alert("لیست خالی است");
       const newData = datas.filter((data) => {
         return !data.isCompeletd;
       });
       dataTodos(newData);
-
       checkItem(newData.length);
       break;
     }
@@ -73,8 +73,8 @@ btnDropdown.addEventListener("click", showMenu);
 
 itemDropdown.forEach((item) => {
   item.addEventListener("click", (e) => {
-    eventValue = e.target.value;
-    itemMenu(eventValue);
+    menuValue = e.target.value;
+    itemMenu(menuValue);
   });
 });
 
@@ -112,6 +112,7 @@ function checkItem(data) {
 
 //create code html
 function dataTodos(datatodo) {
+  checkItem(datatodo.length);
   let htmldata = "";
   let uniqueId = 0;
   datatodo.forEach((data) => {
@@ -224,9 +225,9 @@ function addNewTodo(e) {
     title: addTodoInput.value,
     isCompeletd: false,
   };
-  datas.push(newData);
-  dataTodos(datas);
-  checkItem(datas.length);
+  // datas.push(newData);
+  setDataLocalStorage(newData);
+  itemMenu(menuValue);
 }
 
 addTodoList.addEventListener("submit", addNewTodo);
@@ -235,13 +236,30 @@ addTodoList.addEventListener("submit", addNewTodo);
 
 // event remove item
 function removeItem(id) {
+  let datas = getDatasLocalStorage();
   datas = datas.filter((data) => data.id !== id);
-  itemMenu(eventValue);
+  localStorage.setItem("dataskey", JSON.stringify(datas));
+  itemMenu(menuValue);
 }
 
 // event Compeletd item
 function compeletdItem(id) {
+  let datas = getDatasLocalStorage();
   const data = datas.find((item) => item.id === id);
   data.isCompeletd = true;
-  itemMenu(eventValue);
+  localStorage.setItem("dataskey", JSON.stringify(datas));
+
+  itemMenu(menuValue);
+}
+
+function getDatasLocalStorage() {
+  const datasLS = JSON.parse(localStorage.getItem("dataskey")) || [];
+  return datasLS;
+}
+
+function setDataLocalStorage(data) {
+  const datas = getDatasLocalStorage();
+  datas.push(data);
+  localStorage.setItem("dataskey", JSON.stringify(datas));
+  return datas;
 }
